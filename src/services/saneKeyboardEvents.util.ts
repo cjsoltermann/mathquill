@@ -134,6 +134,7 @@ var saneKeyboardEvents = (function () {
     if (evt.metaKey) modifiers.push('Meta');
     if (evt.altKey) modifiers.push('Alt');
     if (evt.shiftKey) modifiers.push('Shift');
+    if (evt.getModifierState('CapsLock')) modifiers.push('Shift')
 
     if (!modifiers.length) return key;
 
