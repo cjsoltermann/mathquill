@@ -99,6 +99,7 @@ class Options {
   autoSubscriptNumerals?: boolean;
   supSubsRequireOperand?: boolean;
   spaceBehavesLikeTab?: boolean;
+  spaceBehavesLikeArrows?: boolean;
   typingAsteriskWritesTimesSymbol?: boolean;
   typingSlashWritesDivisionSymbol: boolean;
   typingPercentWritesPercentOf?: boolean;

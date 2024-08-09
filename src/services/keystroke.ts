@@ -19,6 +19,15 @@ class MQNode extends NodeBase {
         ctrlr.ctrlDeleteDir(L);
         break;
 
+      case 'Spacebar':
+        if (ctrlr.options.spaceBehavesLikeArrows)
+          ctrlr.moveRight()
+        break;
+      case 'Shift-Spacebar':
+        if (ctrlr.options.spaceBehavesLikeArrows)
+          ctrlr.moveLeft()
+        break;
+
       case 'Shift-Backspace':
       case 'Backspace':
         ctrlr.backspace();
