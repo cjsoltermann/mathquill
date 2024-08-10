@@ -864,3 +864,30 @@ const frakturLetters = [
 for (let [romanLetter, frakturLetter] of frakturLetters) {
   LatexCmds[frakturLetter] = LatexCmds['frak' + romanLetter] = bindVanillaSymbol(`\\mathfrak{${romanLetter}}`, `&${romanLetter}fr;`, 'fraktur ' + romanLetter)
 }
+
+LatexCmds.mathfrak = class extends MathCommand {
+  createLeftOf(_cursor: Cursor) { }
+  numBlocks() {
+    return 1 as const;
+  }
+  parser() {
+    var string = Parser.string;
+    var regex = Parser.regex;
+    var optWhitespace = Parser.optWhitespace;
+    return optWhitespace
+      .then(string('{'))
+      .then(optWhitespace)
+      .then(regex(/^[A-Z]/))
+      .skip(optWhitespace)
+      .skip(string('}'))
+      .map(function (c) {
+        // instantiate the class for the matching char
+        var cmd = LatexCmds[`frak${c}`];
+        if (isMQNodeClass(cmd)) {
+          return new cmd();
+        } else {
+          return (cmd as MQNodeBuilderNoParam)();
+        }
+      });
+  }
+};
